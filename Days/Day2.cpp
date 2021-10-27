@@ -28,17 +28,18 @@ void Day2::Solve() {
     }
 
     // Define the shape of individual keypads and their starting points
+    // They are rotated as such to comfort the X and Y axis of vectors
 
-    std::vector<std::vector<char>>keypad1 = {{'1','2','3'},
-                                             {'4','5','6'},
-                                             {'7','8','9'}};
+    std::vector<std::vector<char>>keypad1 = {{'7','4','1'},
+                                             {'8','5','2'},
+                                             {'9','6','3'}};
 
 
-    std::vector<std::vector<char>>keypad2 = {{'0','0','1','0','0'},
-                                             {'0','2','3','4','0'},
-                                             {'5','6','7','8','9'},
-                                             {'0','A','B','C','0'},
-                                             {'0','0','D','0','0'}};
+    std::vector<std::vector<char>>keypad2 = {{'0','0','5','0','0'},
+                                             {'0','A','6','2','0'},
+                                             {'D','B','7','3','1'},
+                                             {'0','C','8','4','0'},
+                                             {'0','0','9','0','0'}};
 
     int firstX = 1;
     int firstY = 1;
@@ -55,15 +56,14 @@ void Day2::Solve() {
             //////////////////////////////////////////////////////////////////////////////////////////////////////////
             // Move the cursor in said direction, with boundary checking
             // It might be quite messy, so let's clarify
-            // (This is caused by the way of keypad initialization)
             //
-            // The X axis -> increasing the X value moves us down, decreasing it moves the cursor upwards
-            // The Y axis -> increasing the Y value moves up right, decreasing it moves the cursor left
+            // The X axis -> increasing the X value moves us right, decreasing it moves the cursor left
+            // The Y axis -> increasing the Y value moves us upwards, decreasing it moves the cursor downwards
             //
-            // And thus ==> U -> --x
-            //              D -> ++x
-            //              R -> ++y
-            //              L -> --y
+            // And thus ==> U -> ++y
+            //              D -> --y
+            //              R -> ++x
+            //              L -> --x
             //
             // We perform the following boundary checks: For both keypads, when incrementing we check whether we're
             //                                           still in vector boundaries, when decrementing, we check if
@@ -75,19 +75,19 @@ void Day2::Solve() {
 
             switch(step) {
 
-                case 'R':
+                case 'U':
                     firstY+1 < keypad1.size() ? ++firstY : firstY;
                     secondY+1 < keypad2.size() && keypad2[secondX][secondY+1] != '0' ? ++secondY : secondY;
                     break;
-                case 'L':
+                case 'D':
                     firstY-1 >= 0 ? --firstY : firstY;
                     secondY-1 >= 0 && keypad2[secondX][secondY-1] != '0' ? --secondY : secondY;
                     break;
-                case 'D':
+                case 'R':
                     firstX+1 < keypad1.size() ? ++firstX : firstX;
                     secondX+1 < keypad2.size() && keypad2[secondX+1][secondY] != '0' ? ++secondX : secondX;
                     break;
-                case 'U':
+                case 'L':
                     firstX-1 >= 0 ? --firstX : firstX;
                     secondX-1 >= 0 && keypad2[secondX-1][secondY] != '0' ? --secondX : secondX;
                     break;
