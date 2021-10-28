@@ -19,7 +19,7 @@ void Day1::Solve() {
         inputStream >> instruction;
 
         instructions.emplace_back(instruction[0],
-                                  std::stoi(instruction.substr(1,std::string::npos-1)));
+                                  std::stoi(instruction.substr(1,std::string::npos)));
     }
 
     // Resolve which direction to face and move in said direction
