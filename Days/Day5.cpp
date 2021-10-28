@@ -25,16 +25,24 @@ void Day5::Solve() {
 
         if(x.substr(0,5) == "00000") {
 
+            char sixth = x[5];
+            char seventh = x[6];
+
             if(foundOne < 8) {
                 ++foundOne;
-                partOne += x[5];
+                partOne += sixth;
             }
 
             // Cheeky char comparison to make sure index is in 0-7 boundaries + said index is not filled yet
             // Short-circuit evaluation guarantees that it is safe behavior
 
-            if(x[5] > 47 && x[5] < 56 && partTwo[int(x[5])-48] == '_') {
-                partTwo[int(x[5])-48] = x[6];
+            int charBelowZero = 47;
+            int charAboveseven = 56;
+
+            int charToIntOffset = 48;
+
+            if(sixth > charBelowZero && sixth < charAboveseven && partTwo[int(sixth)-charToIntOffset] == '_') {
+                partTwo[int(sixth)-charToIntOffset] = seventh;
                 ++foundTwo;
             }
         }
