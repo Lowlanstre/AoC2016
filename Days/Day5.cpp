@@ -37,11 +37,11 @@ void Day5::Solve() {
             // Short-circuit evaluation guarantees that it is safe behavior
 
             int charBelowZero = 47;
-            int charAboveseven = 56;
+            int charAboveSeven = 56;
 
             int charToIntOffset = 48;
 
-            if(sixth > charBelowZero && sixth < charAboveseven && partTwo[int(sixth)-charToIntOffset] == '_') {
+            if(sixth > charBelowZero && sixth < charAboveSeven && partTwo[int(sixth)-charToIntOffset] == '_') {
                 partTwo[int(sixth)-charToIntOffset] = seventh;
                 ++foundTwo;
             }
