@@ -5,7 +5,7 @@ void Day7::Solve() {
     int partOne = 0;
     int partTwo = 0;
 
-    // Load the input into a container
+    // Load the input into a weird container
 
     std::vector<std::vector<std::string>> IPs;
 
